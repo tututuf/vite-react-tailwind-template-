@@ -8,6 +8,7 @@ specifiers:
   '@mui/material': ^5.14.5
   '@types/react': ^18.2.15
   '@types/react-dom': ^18.2.7
+  '@types/react-transition-group': ^4.4.6
   '@typescript-eslint/eslint-plugin': ^6.0.0
   '@typescript-eslint/parser': ^6.0.0
   '@vitejs/plugin-react': ^4.0.3
@@ -15,11 +16,13 @@ specifiers:
   eslint: ^8.45.0
   eslint-plugin-react-hooks: ^4.6.0
   eslint-plugin-react-refresh: ^0.4.3
+  gsap: ^3.12.2
   postcss: ^8.4.28
   react: ^18.2.0
   react-dom: ^18.2.0
   react-router: ^6.15.0
   react-router-dom: ^6.15.0
+  react-transition-group: ^4.4.5
   tailwindcss: ^3.3.3
   typescript: ^5.0.2
   vite: ^4.4.5
@@ -30,14 +33,17 @@ dependencies:
   '@fontsource/roboto': 5.0.8
   '@mui/icons-material': 5.14.3_h5h5kh4s2gztkajbksiswsn4ia
   '@mui/material': 5.14.5_ho7f4muyxo2kcc3eb2wgnvahca
+  gsap: 3.12.2
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-router: 6.15.0_react@18.2.0
   react-router-dom: 6.15.0_biqbaboplfbrettd7655fr4n2y
+  react-transition-group: 4.4.5_biqbaboplfbrettd7655fr4n2y
 
 devDependencies:
   '@types/react': 18.2.20
   '@types/react-dom': 18.2.7
+  '@types/react-transition-group': 4.4.6
   '@typescript-eslint/eslint-plugin': 6.4.0_ec2ucdo575yoxr55fjuy6wxey4
   '@typescript-eslint/parser': 6.4.0_qj3u6ezxe2airdzjq3nyoxe24m
   '@vitejs/plugin-react': 4.0.4_vite@4.4.9
@@ -924,7 +930,6 @@ packages:
     resolution: {integrity: sha512-VnCdSxfcm08KjsJVQcfBmhEQAPnLB8G08hAxn39azX1qYBQ/5RVQuoHuKIcfKOdncuaUvEpFKFzEvbtIMsfVew==}
     dependencies:
       '@types/react': 18.2.20
-    dev: false
 
   /@types/react/18.2.20:
     resolution: {integrity: sha512-WKNtmsLWJM/3D5mG4U84cysVY31ivmyw85dE84fOCk5Hx78wezB/XEjVPWl2JTZ5FkEeaTJf+VgUAUn3PE7Isw==}
@@ -1681,6 +1686,10 @@ packages:
   /graphemer/1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
     dev: true
+
+  /gsap/3.12.2:
+    resolution: {integrity: sha512-EkYnpG8qHgYBFAwsgsGEqvT1WUidX0tt/ijepx7z8EUJHElykg91RvW1XbkT59T0gZzzszOpjQv7SE41XuIXyQ==}
+    dev: false
 
   /has-flag/3.0.0:
     resolution: {integrity: sha512-sKJf1+ceQBr4SMkvQnBDNDtf4TXpVhVGateu0t918bl30FnbE2m4vNLX+VWe/dpjlb+HugGYzW7uQXH98HPEYw==}

@@ -8,3 +8,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <App />
   </React.StrictMode>,
 )
+
+function updateRootFontSize() {
+  document.documentElement.style.fontSize = window.innerWidth / 100 + 'px'
+}
+updateRootFontSize()
+window.onresize = updateRootFontSize
