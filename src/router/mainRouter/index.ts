@@ -9,8 +9,9 @@ import CustomView from "@/pages/CustomView"
 export const mainMenuRoutes: CustomRouter[] = [
   {
     id: 'GPT',
-    path: '/',
+    path: 'Gpt/:gptId',
     label: 'GPT',
+    index: true,
     Component: GptView,
   }, {
     id: 'OpencvView',

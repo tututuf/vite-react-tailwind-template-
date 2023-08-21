@@ -1,36 +1,35 @@
 import Menu from "./Menu"
 import Main from "./Main"
-import { Suspense } from "react"
-import { Route, Routes } from "react-router"
+import { Routes, Route, Navigate } from "react-router"
+import { TransitionGroup, CSSTransition } from "react-transition-group"
+import { useLocation } from "react-router"
 import { mainMenuRoutes } from "@/router/mainRouter"
 
-
 export default function MainLayout() {
+  const useLocationWrapper = () => useLocation()
+  const location = useLocationWrapper()
+
   return (
     <div className="h-screen flex flex-col">
       <Menu></Menu>
       <Main>
-        <Suspense>
-          <Routes>
-            {
-              mainMenuRoutes.map((route, index) => {
-                return (
-                  <Route path={route.path} element={ (route.Component as () => JSX.Element)() } key={index}>
-                  </Route>
-                )
-              })
-            }
-          </Routes>
-        </Suspense>
-
-        
-        {/* <Suspense>
-          <SwitchTransition mode="out-in">
-            <CSSTransition key={location.href} timeout={300} classNames="fade" nodeRef={null}>
-              <Outlet></Outlet>
-            </CSSTransition>
-          </SwitchTransition>
-        </Suspense> */}
+        <TransitionGroup className="h-full overflow-hidden">
+          <CSSTransition
+            key={location.key}
+            unmountOnExit
+            timeout={1500}
+            classNames="animate"
+          >
+            <Routes>
+              {(
+                mainMenuRoutes.map((router, index) => {
+                  return <Route path={router.path} key={index} element={(router.Component as () => JSX.Element)()}></Route>
+                })
+              )}
+              <Route path="/" element={<Navigate to='/Gpt/0'></Navigate>}></Route>
+            </Routes>
+          </CSSTransition>
+        </TransitionGroup>
       </Main>
     </div>
   )

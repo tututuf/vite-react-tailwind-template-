@@ -1,5 +1,5 @@
-import LeftSide from "@/doubleGridsLayout/leftSide"
-import RightSide from "@/doubleGridsLayout/rightSide"
+import LeftSide from "./LeftSide"
+import RightSide from "./RightSide"
 
 export default function GptView() {
   return (

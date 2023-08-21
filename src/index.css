@@ -87,17 +87,11 @@ button:focus-visible {
   }
 }
 
-.fade-exit {
-  opacity: 0;
-  transform: translateX(50px);
-}
-
-.fade-exit-active {
-  opacity: 1;
-  transform: translateX(0%);
-}
-
-.fade-enter-active,
-.fade-exit-active {
-  transition: all 300ms;
+.active::after{
+  content: ' ';
+  display: block;
+  animation: zoom-out 0.5s ease;
+  background: var(--theme-menu-font-color);
+  height: 2px;
+  width: 100%;
 }
