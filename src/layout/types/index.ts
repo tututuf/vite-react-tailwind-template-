@@ -1,9 +1,7 @@
 import { ReactNode } from "react"
+import { CustomRouter } from "@/router/types"
 
-export interface MenuItemProps{
-  label: string
-  path?: string
-}
+export type MenuItemProps = CustomRouter
 
 export interface MainLayoutProps{
   children?: ReactNode

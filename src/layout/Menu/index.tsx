@@ -7,7 +7,7 @@ export default function Menu() {
       {
         mainMenuRoutes.map((router, index) => {
           return(
-            <MenuItem label={router.label} path={router.path} key={index}></MenuItem>
+            <MenuItem label={router.label} path={router.path} key={index} to={router.to}></MenuItem>
           )
         })
       }

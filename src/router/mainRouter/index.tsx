@@ -2,17 +2,27 @@ import MainLayout from "@/layout"
 import { RouteObject } from "react-router"
 // import { lazy } from "react"
 import { CustomRouter } from "../types"
-import GptView from "@/pages/GptView"
-import OpencvView from "@/pages/OpencvView"
-import CustomView from "@/pages/CustomView"
+import { Navigate } from "react-router"
+import GptView from "@/layout/GptView"
+import OpencvView from "@/layout/OpencvView"
+import CustomView from "@/layout/CustomView"
+import { lazy } from "react"
 
 export const mainMenuRoutes: CustomRouter[] = [
   {
     id: 'GPT',
-    path: 'Gpt/:gptId',
+    path: 'Gpt',
     label: 'GPT',
-    index: true,
     Component: GptView,
+    children: [
+      {
+        index: true,
+        Component: lazy(() => import("@/pages/GptPage"))
+      }, {
+        path: ':gptId',
+        Component: lazy(() => import("@/pages/GptPage"))
+      }
+    ]
   }, {
     id: 'OpencvView',
     path: 'opencv',
@@ -30,5 +40,11 @@ export const mainRouters: RouteObject = {
   id: 'main',
   path: '/',
   Component: MainLayout,
-  children: mainMenuRoutes
+  children: [
+    { 
+      index: true,
+      element: <Navigate to='/Gpt'></Navigate>
+    },
+    ...mainMenuRoutes
+  ]
 }
