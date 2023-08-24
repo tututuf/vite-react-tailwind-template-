@@ -2,8 +2,9 @@ import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
 import { SearchInputProps } from './types';
+import SendIcon from '@mui/icons-material/Send'
+import { Tooltip } from '@mui/material';
 
 export default function CustomizedInputBase(props: SearchInputProps) {  
   return (
@@ -23,9 +24,11 @@ export default function CustomizedInputBase(props: SearchInputProps) {
           value={ props.value }
           onChange={ props.onChange }
         />
-        <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
-          <SearchIcon />
-        </IconButton>
+        <Tooltip title="发送">
+          <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
+            <SendIcon />
+          </IconButton>
+        </Tooltip>
       </Paper>
     </div>
     

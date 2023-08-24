@@ -6,14 +6,14 @@ import { Navigate } from "react-router"
 import GptView from "@/layout/GptView"
 import OpencvView from "@/layout/OpencvView"
 import CustomView from "@/layout/CustomView"
-import { lazy } from "react"
+import { createRef, lazy } from "react"
 
 export const mainMenuRoutes: CustomRouter[] = [
   {
     id: 'GPT',
     path: 'Gpt',
     label: 'GPT',
-    Component: GptView,
+    element: <GptView />,
     children: [
       {
         index: true,
@@ -22,24 +22,26 @@ export const mainMenuRoutes: CustomRouter[] = [
         path: ':gptId',
         Component: lazy(() => import("@/pages/GptPage"))
       }
-    ]
+    ],
+    nodeRef: createRef()
   }, {
     id: 'OpencvView',
     path: 'opencv',
     label: 'OPENCV',
-    Component: OpencvView
+    element: <OpencvView />,
+    nodeRef: createRef()
   }, {
     id: 'CustomView',
     path: 'custom',
     label: 'CUSTOM',
-    Component: CustomView
+    element: <CustomView />,
+    nodeRef: createRef()
   }
 ]
 
 export const mainRouters: RouteObject = {
-  id: 'main',
   path: '/',
-  Component: MainLayout,
+  element: <MainLayout />,
   children: [
     { 
       index: true,

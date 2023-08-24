@@ -1,31 +1,37 @@
 import Menu from "./Menu"
 import Main from "./Main"
-import { Outlet } from "react-router"
-import { Fade } from "@mui/material"
-// import { TransitionGroup, CSSTransition } from "react-transition-group"
-// import { useLocation } from "react-router"
+import { useMatches, useOutlet } from "react-router"
+import { SwitchTransition, CSSTransition } from "react-transition-group"
+import { mainMenuRoutes } from "@/router/mainRouter"
 
 export default function MainLayout() {
-  // const useLocationWrapper = () => useLocation()
-  // const location = useLocationWrapper()
+  const matches = useMatches()
+  const matche = matches.find(matche => {
+    return mainMenuRoutes.some(router => {
+      return matche.pathname === '/' + router.path
+    })
+  })
+  const currentOutlet = useOutlet()
   
   return (
     <div className="h-screen flex flex-col">
       <Menu></Menu>
       <Main>
-        <Fade>
-          <Outlet></Outlet>
-        </Fade>
-        {/* <TransitionGroup className="h-full overflow-hidden">
+        <SwitchTransition>
           <CSSTransition
-            key={location.key}
+            key={matche?.pathname}
+            appear
+            timeout={300}
+            classNames="page"
             unmountOnExit
-            timeout={1500}
-            classNames="animate"
-          > */}
-            
-          {/* </CSSTransition>
-        </TransitionGroup> */}
+          >
+            {() => (
+              <div className="h-full">
+                {currentOutlet}
+              </div>
+            )}
+          </CSSTransition>
+        </SwitchTransition>
       </Main>
     </div>
   )
