@@ -20,7 +20,7 @@ export default function CustomizedInputBase(props: SearchInputProps) {
         <InputBase
           sx={{ ml: 1, flex: 1 }}
           placeholder="请输入"
-          inputProps={{ 'aria-label': 'search google maps' }}
+          inputProps={{ 'aria-label': '请输入' }}
           value={ props.value }
           onChange={ props.onChange }
         />
@@ -31,6 +31,5 @@ export default function CustomizedInputBase(props: SearchInputProps) {
         </Tooltip>
       </Paper>
     </div>
-    
   );
 }
