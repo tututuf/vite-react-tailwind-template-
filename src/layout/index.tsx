@@ -8,7 +8,7 @@ export default function MainLayout() {
   const matches = useMatches()
   const matche = matches.find(matche => {
     return mainMenuRoutes.some(router => {
-      return matche.pathname === '/' + router.path
+      return matche.pathname === '/main/' + router.path
     })
   })
   const currentOutlet = useOutlet()

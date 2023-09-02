@@ -12,7 +12,7 @@ export default function MenuItem(props: MenuItemProps) {
 function SomeComp(path = "/") { 
   const matchs = useMatches()
   const match = matchs.find(match => {    
-    return match.pathname === '/' + path 
+    return match.pathname === '/main/' + path 
   })
   return match ? "active" : ""
 }
