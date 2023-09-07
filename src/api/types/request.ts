@@ -1,4 +1,15 @@
 export interface LoginReq {
-  account: string; //用户名
+  username: string; //用户名
   psw: string; // 密码
+}
+
+export interface GetHistoryReq {
+  page?: number;
+  size?: number;
+  chat_id?: number;
+}
+
+export interface GetChatListReq {
+  page?: number;
+  size?: number;
 }

@@ -1,11 +1,12 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import { ResponseData } from '@/api/types/response';
+import MessageBox from '@/components/MessageBox';
 
-interface CustomAxiosInstance<T> extends AxiosInstance {
-  (config: AxiosRequestConfig): Promise<ResponseData<T>>;
+interface CustomAxiosInstance extends AxiosInstance {
+  <T>(config: AxiosRequestConfig): Promise<ResponseData<T>>;
 }
 
-const request: CustomAxiosInstance<unknown> = axios.create({
+const request: CustomAxiosInstance = axios.create({
   baseURL: '/server'
 });
 
@@ -25,7 +26,8 @@ request.interceptors.response.use(
     return data;
   },
   (error) => {
-    console.log(error);
+    const err = error.response.data;
+    MessageBox.error(err.msg || '服务器连接失败');
     return Promise.reject(error);
   }
 );

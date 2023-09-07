@@ -1,5 +1,5 @@
-import { Outlet } from "react-router"
-import { Suspense } from "react"
+import { Outlet } from 'react-router';
+import { Suspense } from 'react';
 export default function RightSide() {
   return (
     <div className="flex-1 overflow-auto">
@@ -7,5 +7,5 @@ export default function RightSide() {
         <Outlet></Outlet>
       </Suspense>
     </div>
-  )
+  );
 }

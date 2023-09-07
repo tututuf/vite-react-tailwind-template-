@@ -22,3 +22,38 @@ export interface ResponseData<T> {
   msg: ResMsg;
   code: ResCode;
 }
+
+export interface PaginationRes<T> {
+  rows: T[];
+  total: number;
+}
+
+export interface LoginRes {
+  id: number;
+  username: string;
+  nickname: string;
+  mark: string;
+  real_name: string;
+  age: string;
+  status: string;
+  token: string;
+}
+
+export interface HistoryInfoItem {
+  id: number;
+  user_id: number;
+  message: string;
+  chat_id: number;
+  create_date: Date;
+}
+
+export type HistoryInfoRes = PaginationRes<HistoryInfoItem>;
+
+export interface ChatListItem {
+  id: number;
+  user_id: number;
+  title: string;
+  create_date: Date;
+}
+
+export type ChatListRes = PaginationRes<ChatListItem>;

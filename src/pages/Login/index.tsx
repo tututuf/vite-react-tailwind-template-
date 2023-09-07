@@ -1,6 +1,6 @@
 import { Button, TextField } from '@mui/material';
 import { useState, ChangeEvent, FormEvent } from 'react';
-import { login } from '@/api';
+import { loginApi } from '@/api';
 import MessageBox from '@/components/MessageBox';
 import { ResType } from '@/api/types/response';
 import { useNavigate } from 'react-router';
@@ -9,7 +9,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    account: '',
+    username: '',
     psw: ''
   });
   const changeInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -21,10 +21,11 @@ export default function LoginPage() {
 
   const loginHandler = async (e: FormEvent) => {
     e.preventDefault();
-    const res = await login(formData);
+    const res = await loginApi(formData);
     MessageBox[res.type](res.msg);
     if (res.type === ResType.SUCCESS) {
-      navigate('/main');
+      localStorage.setItem('user.token', 'Bearer' + ' ' + res.data.token);
+      navigate('/main/Gpt');
     }
   };
 
@@ -47,9 +48,9 @@ export default function LoginPage() {
             error={checkAccount()}
             id="outlined-error"
             label="账号"
-            value={formData.account}
+            value={formData.username}
             variant="standard"
-            name="account"
+            name="username"
             onChange={changeInputHandler}
             className="w-[70%]"
           />
