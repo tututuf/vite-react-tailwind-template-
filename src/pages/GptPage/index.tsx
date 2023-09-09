@@ -20,9 +20,21 @@ export default function GptPage() {
     });
     setChatList(res.data.rows);
   };
+
+  const scrollToBottom = () => {
+    const bottom = document.querySelector('.bottom-tag');
+    bottom?.scrollIntoView({
+      behavior: 'smooth'
+    });
+  };
+
   useEffect(() => {
     getChatList();
   }, [params.gptId]);
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [chatList]);
 
   const onSubmitHnadler = (e: FormEvent) => {
     e.preventDefault();
@@ -51,6 +63,7 @@ export default function GptPage() {
             你好, {params.gptId}
           </span>
         </div>
+        <div className="bottom-tag"></div>
       </div>
       <div className="flex justify-center h-5rem">
         <SearchInput
