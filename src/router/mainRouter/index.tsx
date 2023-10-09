@@ -1,11 +1,13 @@
 import MainLayout from '@/layout';
 import { RouteObject } from 'react-router';
-// import { lazy } from "react"
 import { CustomRouter } from '../types';
 import { Navigate } from 'react-router';
+import { MediaRouter } from './mediaRouter';
 import GptView from '@/layout/GptView';
 import OpencvView from '@/layout/OpencvView';
 import CustomView from '@/layout/CustomView';
+import MediaPage from '@/pages/MediaPage';
+
 import { createRef, lazy } from 'react';
 
 export const mainMenuRoutes: CustomRouter[] = [
@@ -32,6 +34,20 @@ export const mainMenuRoutes: CustomRouter[] = [
     label: 'OPENCV',
     element: <OpencvView />,
     nodeRef: createRef()
+  },
+  {
+    id: 'MediaView',
+    path: 'media',
+    label: 'Media',
+    element: <MediaPage />,
+    nodeRef: createRef(),
+    children: [
+      {
+        index: true,
+        element: <Navigate to="/main/media/vod"></Navigate>
+      },
+      ...MediaRouter
+    ]
   },
   {
     id: 'CustomView',

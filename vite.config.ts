@@ -9,6 +9,10 @@ export default defineConfig({
       '/server': {
         target: 'http://localhost:3000',
         changeOrigin: true
+      },
+      '/static': {
+        target: 'http://120.79.183.77',
+        changeOrigin: true
       }
     }
   },
