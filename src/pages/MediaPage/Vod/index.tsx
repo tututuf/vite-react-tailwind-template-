@@ -7,14 +7,14 @@ export default function Vod() {
   useEffect(() => {
     if (!videoRef.current) return;
     const player = dashjs.MediaPlayer().create();
-    player.initialize(videoRef.current, '/static/media/dash/lol.mpd', true);
+    player.initialize(videoRef.current, '/static/media/dash/animal.mpd', true);
   }, []);
   return (
     <div>
       <span>测试 Dash</span>
       <video ref={videoRef} controls>
         <source
-          src="/static/media/dash/lol.mpd"
+          src="/static/media/dash/animal.mpd"
           type="application/dash+xml"
         ></source>
         Your browser does not support the video tag.
