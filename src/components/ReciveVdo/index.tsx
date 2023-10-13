@@ -1,31 +1,26 @@
 import { Button } from '@mui/material';
-import { useAppSelector, useAppDispatch } from '@/store/index';
+import { useAppDispatch } from '@/store/index';
 import { createRef, useEffect } from 'react';
+
 import {
-  initRemoteConnection,
-  setRemoteIceCandidate
-} from '@/store/reducers/webRtcReducer';
+  setRemoteIceCandidateAsync,
+  initRemoteConnection
+} from '@/store/actions/webRtcAction';
 
 export function ReciveVdo() {
   const remoteVdoRef = createRef<HTMLVideoElement>();
   const dispatch = useAppDispatch();
-  const store = useAppSelector((state) => state.webRtc);
   useEffect(() => {
     getStreamHandler();
   }, []);
-
+  // getStreamHandler();
   /**
    * 接收视频
    */
   function getStreamHandler() {
-    // if (!remoteVdoRef) return;
-    dispatch(initRemoteConnection());
-    store.remoteConnection.ontrack = (event) => {
-      if (!remoteVdoRef.current) return;
-      const remoteStream = event.streams[0];
-      remoteVdoRef.current.srcObject = remoteStream;
-    };
-    dispatch(setRemoteIceCandidate());
+    if (!remoteVdoRef.current) return;
+    dispatch(initRemoteConnection(remoteVdoRef.current));
+    dispatch(setRemoteIceCandidateAsync());
   }
   return (
     <>
