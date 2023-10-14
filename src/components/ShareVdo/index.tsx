@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import { createRef } from 'react';
+import { createRef, useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '@/store/index';
 // import {
 //   initLocalConnection
@@ -14,10 +14,11 @@ import {
 
 export function ShareVdo() {
   let screenStream: MediaStream;
-  const senderVdo = createRef<HTMLVideoElement>();
   const senderVdoBox = createRef<HTMLDivElement>();
+  const vdoCanvasRef = createRef<HTMLCanvasElement>();
   const webRtcStore = useAppSelector((state) => state.webRtc);
   const dispatch = useAppDispatch();
+  let originVdoCtx: CanvasRenderingContext2D | null;
   let video: HTMLVideoElement;
   const width = 400,
     height = 200;
@@ -26,11 +27,11 @@ export function ShareVdo() {
    */
   async function selectVdoHandler() {
     try {
-      if (!senderVdo.current) return;
+      if (!video) return;
       screenStream = await navigator.mediaDevices.getDisplayMedia({
         video: true
       });
-      senderVdo.current.srcObject = screenStream;
+      video.srcObject = screenStream;
       screenStream.getTracks().forEach((track) => {
         webRtcStore.localConnection.addTrack(track, screenStream);
       });
@@ -45,29 +46,39 @@ export function ShareVdo() {
     video.width = 400;
     video.controls = true;
     video.autoplay = true;
+    video.addEventListener('play', timerCallback);
     return video;
   };
 
   const showCanvas = () => {
+    if (!vdoCanvasRef.current) return;
+    originVdoCtx = vdoCanvasRef.current.getContext('2d');
     video = createVideo();
     senderVdoBox.current?.append(video);
     timerCallback();
   };
 
-  const renderCanvas = () => {};
+  const renderCanvas = () => {
+    originVdoCtx?.drawImage(video, 0, 0, width, height);
+  };
 
   /**
    * 按帧渲染
    */
   function timerCallback() {
-    if (video.paused || video.ended) return;
+    if (video?.paused || video?.ended) return;
     renderCanvas();
-    setTimeout(() => {
+    requestAnimationFrame(() => {
       timerCallback();
-    }, 0);
+    });
   }
 
   timerCallback();
+
+  useEffect(() => {
+    showCanvas();
+  }, []);
+
   /**
    * 共享屏幕
    */
@@ -102,14 +113,13 @@ export function ShareVdo() {
           发送消息
         </Button>
       </div>
-      <canvas height={height} width={width}></canvas>
-      <video
-        ref={senderVdo}
+      <canvas
+        ref={vdoCanvasRef}
         height={height}
         width={width}
-        controls
-        autoPlay
-      ></video>
+        className="mb-2 bg-stone-900"
+      ></canvas>
+      {/* <video height={height} width={width} controls autoPlay></video> */}
     </div>
   );
 }
