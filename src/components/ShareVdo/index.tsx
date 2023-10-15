@@ -18,10 +18,12 @@ export function ShareVdo() {
   const vdoCanvasRef = createRef<HTMLCanvasElement>();
   const webRtcStore = useAppSelector((state) => state.webRtc);
   const dispatch = useAppDispatch();
+  let canvasStream: MediaStream;
   let originVdoCtx: CanvasRenderingContext2D | null;
   let video: HTMLVideoElement;
-  const width = 400,
-    height = 200;
+  const width = 2560,
+    height = 1440;
+
   /**
    * 选择即将共享的屏幕
    */
@@ -32,9 +34,10 @@ export function ShareVdo() {
         video: true
       });
       video.srcObject = screenStream;
-      screenStream.getTracks().forEach((track) => {
-        webRtcStore.localConnection.addTrack(track, screenStream);
-      });
+
+      // screenStream.getTracks().forEach((track) => {
+      //   webRtcStore.localConnection.addTrack(track, screenStream);
+      // });
     } catch (err) {
       console.error(err);
     }
@@ -42,16 +45,22 @@ export function ShareVdo() {
 
   const createVideo = (): HTMLVideoElement => {
     const video = document.createElement('video');
-    video.height = 200;
-    video.width = 400;
+    video.height = height;
+    video.width = width;
     video.controls = true;
     video.autoplay = true;
+    video.style.height = '200px';
+    video.style.width = '400px';
     video.addEventListener('play', timerCallback);
     return video;
   };
 
   const showCanvas = () => {
     if (!vdoCanvasRef.current) return;
+    canvasStream = vdoCanvasRef.current.captureStream();
+    canvasStream.getTracks().forEach((track) => {
+      webRtcStore.localConnection.addTrack(track, canvasStream);
+    });
     originVdoCtx = vdoCanvasRef.current.getContext('2d');
     video = createVideo();
     senderVdoBox.current?.append(video);
@@ -117,7 +126,7 @@ export function ShareVdo() {
         ref={vdoCanvasRef}
         height={height}
         width={width}
-        className="mb-2 bg-stone-900"
+        className="mb-2 w-[400px] h-[200px] bg-stone-900"
       ></canvas>
       {/* <video height={height} width={width} controls autoPlay></video> */}
     </div>

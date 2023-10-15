@@ -4,7 +4,7 @@ import { ReciveVdo } from '@/components/ReciveVdo';
 // 视频通话
 export default function VideoCall() {
   return (
-    <div>
+    <div className="overflow-auto h-full">
       <span>测试 webRtc</span>
       <div className="mt-3">
         <ShareVdo></ShareVdo>

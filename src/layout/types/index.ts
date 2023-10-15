@@ -1,8 +1,8 @@
-import { ReactNode } from "react"
-import { CustomRouter } from "@/router/types"
+import { ReactNode } from 'react';
+import { CustomRouter } from '@/router/types';
 
-export type MenuItemProps = CustomRouter
+export type MenuItemProps = CustomRouter;
 
-export interface MainLayoutProps{
-  children?: ReactNode
+export interface MainLayoutProps {
+  children?: ReactNode;
 }
