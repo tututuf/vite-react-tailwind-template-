@@ -12,7 +12,16 @@ export function ReciveVdo() {
   const dispatch = useAppDispatch();
   useEffect(() => {
     getStreamHandler();
+    getVdoInfo();
   }, []);
+
+  function getVdoInfo() {
+    if (!remoteVdoRef.current) return;
+    console.dir(remoteVdoRef.current);
+    remoteVdoRef.current.onloadedmetadata = () => {
+      console.dir(remoteVdoRef.current);
+    };
+  }
   // getStreamHandler();
   /**
    * 接收视频
@@ -32,8 +41,8 @@ export function ReciveVdo() {
       </div>
       <video
         ref={remoteVdoRef}
-        height="200"
-        width="400"
+        height={'200'}
+        width={'400'}
         controls
         autoPlay
       ></video>
